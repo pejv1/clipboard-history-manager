@@ -12,6 +12,8 @@ A powerful AutoHotkey v2 script that provides advanced clipboard management with
 - **🔇 Silent Operation**: Optional tooltips and notifications
 - **🛡️ Safe Pasting**: Preserves original clipboard content
 
+  ![Clipboard history manager](clipboardHistoryManager.png)
+
 ## 🚀 Quick Start
 
 1. **Download**: Save `ClipboardHistory.ahk` to your computer
