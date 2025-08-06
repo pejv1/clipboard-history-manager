@@ -13,7 +13,6 @@
 
 ; Global variables
 global clipboardHistory := []
-global maxItems := 10
 global isMenuVisible := false
 global clipGui := Gui()
 global lastClip := ""
@@ -27,6 +26,11 @@ global settings := {
     maxDisplayLength: 150,
     showTooltips: false,
     soundOnPaste: false
+}
+
+; Ensure maxItems doesn't exceed 10 (limited by available number keys)
+if (settings.maxItems > 10) {
+    settings.maxItems := 10
 }
 
 ; Initialize and start monitoring
@@ -138,7 +142,13 @@ ShowClipboardMenu() {
 
     ; Add instructions
     clipGui.AddText("w450", separator)
-    clipGui.AddText("w450 cGray", "Press 1–" . settings.maxItems . " to paste • Ctrl+Win+C to clear • Ctrl+Win+V to pause • Ctrl+Win+Z to toggle tooltips • Esc to close")
+    if (settings.maxItems >= 10) {
+        instructionText := "Press 1–9, 0 for item 10 to paste"
+    } else {
+        instructionText := "Press 1–" . settings.maxItems . " to paste"
+    }
+    instructionText .= " • Ctrl+Win+C to clear • Ctrl+Win+V to pause • Ctrl+Win+Z to toggle tooltips • Esc to close"
+    clipGui.AddText("w450 cGray", instructionText)
     
     ; Position menu
     posX := 600
